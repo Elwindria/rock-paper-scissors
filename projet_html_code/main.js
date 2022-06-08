@@ -36,6 +36,7 @@ const all_option_container = document.querySelectorAll(".option-container");
 var step_1 = document.querySelector(".step-1");
 var step_2 = document.querySelector(".step-2");
 const annouce_winner = document.querySelector(".annouce-winner");
+const play_again = document.querySelector(".play-again-btn");
 
 const player_pick = document.querySelector(".player-pick");
 const img_player_pick = player_pick.children[1];
@@ -93,18 +94,34 @@ function whoWin (signe_player, signe_computer) {
 
     if ( signe_player == signe_computer ){
         annouce_winner_text.innerHTML = "Try Again";
+        var winOrNot = 0;
     } else if ( signe_player == "rock" && signe_computer == "paper") {
         annouce_winner_text.innerHTML = "You Lose";
-        let winOrNot = 0;
+        var winOrNot = -1;
     } else if ( signe_player == "scissors" && signe_computer == "rock") {
         annouce_winner_text.innerHTML = "You Lose";
-        let winOrNot = 0;
+        var winOrNot = -1;
     } else if ( signe_player == "paper" && signe_computer == "scissors") {
         annouce_winner_text.innerHTML = "You Lose";
-        let winOrNot = 0;
+        var winOrNot = -1;
     } else {
         annouce_winner_text.innerHTML = "You Win";
-        let winOrNot = 1;
+        var winOrNot = 1;
     }
+
+    const score = document.getElementById("score"); /*calcul du score */
+    score_final = score_final + winOrNot;
+    score.innerHTML = score_final; /*affichage du score */
+}
+
+play_again.onclick = function () {
+    step_1.classList.remove("step-1-minimize");
+    step_2.classList.remove("step-2-minimizer");
+
+    img_player_pick.children[0].remove(); /* Delete des images */
+    img_computer_pick.children[0].remove();
+
+    img_player_pick.classList.remove("paper", "scissors", "rock");
+    img_computer_pick.classList.remove("paper", "scissors", "rock");
 }
 /* game */
