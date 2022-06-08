@@ -63,10 +63,10 @@ function gamestart (signe) {
     img_player_pick.classList.add(signe); /* création de l'image */
     img_player_pick.appendChild(div);
 
-    computer();
+    computer(signe);
 }
 
-function computer () {
+function computer (signe_player) {
     var array = [ "paper", "scissors", "rock" ];
     var nbr_rdm = Math.floor( Math.random() * 3 );
     var signe_computer = array[nbr_rdm];
@@ -82,6 +82,29 @@ function computer () {
 
     img_computer_pick.classList.add(signe_computer); /* création de l'image */
     img_computer_pick.appendChild(div_computer);
+
+    setTimeout(whoWin(signe_player, signe_computer), 2000);
 }
 
+function whoWin (signe_player, signe_computer) {
+    const annouce_winner_text = document.querySelector(".annouce-winner-text");
+
+    annouce_winner.style.visibility = ("visible"); /*Apparition du WhoWin */
+
+    if ( signe_player == signe_computer ){
+        annouce_winner_text.innerHTML = "Try Again";
+    } else if ( signe_player == "rock" && signe_computer == "paper") {
+        annouce_winner_text.innerHTML = "You Lose";
+        let winOrNot = 0;
+    } else if ( signe_player == "scissors" && signe_computer == "rock") {
+        annouce_winner_text.innerHTML = "You Lose";
+        let winOrNot = 0;
+    } else if ( signe_player == "paper" && signe_computer == "scissors") {
+        annouce_winner_text.innerHTML = "You Lose";
+        let winOrNot = 0;
+    } else {
+        annouce_winner_text.innerHTML = "You Win";
+        let winOrNot = 1;
+    }
+}
 /* game */
