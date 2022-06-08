@@ -7,6 +7,7 @@ const body = document.querySelector("body");
 const header = document.querySelector("header");
 const main = document.querySelector("main");
 const section = document.querySelector(".extra");
+let x = 0;
 
 /* rules */ 
 
@@ -110,8 +111,14 @@ function whoWin (signe_player, signe_computer) {
     }
 
     const score = document.getElementById("score"); /*calcul du score */
-    score_final = score_final + winOrNot;
-    score.innerHTML = score_final; /*affichage du score */
+
+    if (winOrNot == -1 && x != 0){
+        x--
+    } else if (winOrNot == 1 ){
+        x++
+    }
+
+    score.innerHTML = x; /*affichage du score */
 }
 
 play_again.onclick = function () {
