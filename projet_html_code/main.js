@@ -55,12 +55,33 @@ function gamestart (signe) {
     annouce_winner.style.visibility = ("collapse");
     img_player_pick.classList.remove("replace");
 
-    img.src = "icon-"+signe+".svg";
+    img.src = "icon-"+signe+".svg"; /* caractéristique de l'image */
     img.alt = "option";
     div.classList.add("option");
     div.appendChild(img);
 
-    img_player_pick.classList.add(signe);
+    img_player_pick.classList.add(signe); /* création de l'image */
     img_player_pick.appendChild(div);
+
+    computer();
 }
+
+function computer () {
+    var array = [ "paper", "scissors", "rock" ];
+    var nbr_rdm = Math.floor( Math.random() * 3 );
+    var signe_computer = array[nbr_rdm];
+    
+    img_computer_pick.classList.remove("replace");
+    var img_computer = document.createElement("img");
+    var div_computer = document.createElement("div");
+
+    img_computer.src = "icon-"+signe_computer+".svg"; /* caractéristique de l'image */
+    img_computer.alt = "option";
+    div_computer.classList.add("option");
+    div_computer.appendChild(img_computer);
+
+    img_computer_pick.classList.add(signe_computer); /* création de l'image */
+    img_computer_pick.appendChild(div_computer);
+}
+
 /* game */
