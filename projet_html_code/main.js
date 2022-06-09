@@ -6,9 +6,12 @@ const header = document.querySelector("header");
 const main = document.querySelector("main");
 const section = document.querySelector(".extra");
 
-var x = localStorage.getItem('storage');
-score.innerHTML = x;
+let x = 0;
 
+if (localStorage.getItem('storage') != null ){
+    x = localStorage.getItem('storage');
+    score.innerHTML = x;
+}
 
 /* rules */ 
 
