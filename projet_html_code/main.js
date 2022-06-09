@@ -1,5 +1,3 @@
-/* all const */
-
 const aside = document.querySelector("aside");
 const rules = document.querySelector(".rules-btn");
 const btn_close_rules = document.querySelector(".close-rules");
@@ -7,11 +5,14 @@ const body = document.querySelector("body");
 const header = document.querySelector("header");
 const main = document.querySelector("main");
 const section = document.querySelector(".extra");
-let x = 0;
+
+var x = localStorage.getItem('storage');
+score.innerHTML = x;
+
 
 /* rules */ 
 
-rules.onclick = function() {
+rules.onclick = function() { /*affichage */
     aside.style.zIndex = "1";
     header.style.opacity = "60%";
     main.style.opacity = "60%";
@@ -19,7 +20,7 @@ rules.onclick = function() {
     aside.style.opacity = "unset";
 }
 
-btn_close_rules.onclick = function() {
+btn_close_rules.onclick = function() { /*fermeture */
     aside.style.zIndex = "-1";
     header.style.opacity = "100%";
     main.style.opacity = "100%";
@@ -33,7 +34,6 @@ btn_close_rules.onclick = function() {
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const rock = document.querySelector(".rock");
-const all_option_container = document.querySelectorAll(".option-container");
 var step_1 = document.querySelector(".step-1");
 var step_2 = document.querySelector(".step-2");
 const annouce_winner = document.querySelector(".annouce-winner");
@@ -85,7 +85,7 @@ function computer (signe_player) {
     img_computer_pick.classList.add(signe_computer); /* création de l'image */
     img_computer_pick.appendChild(div_computer);
 
-    setTimeout(whoWin(signe_player, signe_computer), 2000);
+    whoWin(signe_player, signe_computer);
 }
 
 function whoWin (signe_player, signe_computer) {
@@ -95,33 +95,28 @@ function whoWin (signe_player, signe_computer) {
 
     if ( signe_player == signe_computer ){
         annouce_winner_text.innerHTML = "Try Again";
-        var winOrNot = 0;
     } else if ( signe_player == "rock" && signe_computer == "paper") {
         annouce_winner_text.innerHTML = "You Lose";
-        var winOrNot = -1;
+        x--
     } else if ( signe_player == "scissors" && signe_computer == "rock") {
         annouce_winner_text.innerHTML = "You Lose";
-        var winOrNot = -1;
+        x--
     } else if ( signe_player == "paper" && signe_computer == "scissors") {
         annouce_winner_text.innerHTML = "You Lose";
-        var winOrNot = -1;
+        x--
     } else {
         annouce_winner_text.innerHTML = "You Win";
-        var winOrNot = 1;
+        x++
     }
 
     const score = document.getElementById("score"); /*calcul du score */
 
-    if (winOrNot == -1 && x != 0){
-        x--
-    } else if (winOrNot == 1 ){
-        x++
-    }
+    localStorage.setItem("storage", x);
 
     score.innerHTML = x; /*affichage du score */
 }
 
-play_again.onclick = function () {
+play_again.onclick = function () { /*reset */
     step_1.classList.remove("step-1-minimize");
     step_2.classList.remove("step-2-minimizer");
 
